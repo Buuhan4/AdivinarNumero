@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Adivinanza</title>
+    <style>
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+            font-size: 23px;
+        }
+
+        .uno {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px;
+            display: inline-block;
+        }
+
+        #eleccionJugador {
+            padding: 33px;
+            border-radius: 5px;
+            font-size: 47px;
+            text-align: center;
+        }
+
+        button {
+            background-color:green;
+            color: white;
+            padding: 20px 30px;            border: none;
+            border-radius: 5px;
+            font-size: 26px;
+        }
+
+        button:hover {
+            background-color: black;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="uno">
+        <h1>Juego de Adivinanza del 1 al 100</h1>
+        <p>Intenta adivinar el número aleatorio</p>
+        <input type="number" id="eleccionJugador" placeholder="Introduce tu número" min="1" max="100"><br><br>
+        <button onclick="comprobarAdivinanza()">Adivinar</button><br><br>
+        <div id="salidaMensaje"></div>
+    </div>
+
+    <script>
+
+        let numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+
+        let intentos = 0;
+
+        function comprobarAdivinanza() {
+
+            let eleccionJugador = parseInt(document.getElementById('eleccionJugador').value); // Aquí estaba el error con 'userGuess'
+
+            intentos++;
+
+            let mensaje;
+
+            if (eleccionJugador == numeroAleatorio) {
+                mensaje = "¡Felicidades! Adivinaste el número";
+                document.getElementById('intentos').textContent = `Lo lograste en ${intentos} intentos.`;
+            } else if (eleccionJugador > numeroAleatorio) {
+                mensaje = "El número es más bajo";
+            } else {
+                mensaje = "El número es más alto";
+            }
+
+            document.getElementById('salidaMensaje').textContent = mensaje;
+            document.getElementById('eleccionJugador').value = '';
+
+        }
+
+    </script>
+</body>
+
+</html>
